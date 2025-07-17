@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Mon Portfolio</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
+            <style>
+                body { font-family: 'Inter', sans-serif; }
+                  </style>
+                  </head>
+                  <body class="bg-white text-black">
+                    <!-- Header -->
+                      <header class="p-6 bg-black text-white flex justify-between items-center">
+                          <h1 class="text-2xl font-bold">LYNX</h1>
+                              <nav class="space-x-4">
+                                    <a href="#about" class="hover:underline">À propos</a>
+                                          <a href="#projects" class="hover:underline">Projets</a>
+                                                <a href="#contact" class="hover:underline">Contact</a>
+                                                      <a href="/admin.html" class="hover:underline text-yellow-400">Admin</a>
+                                                          </nav>
+                                                            </header>  <!-- About -->  <section id="about" class="p-10 max-w-3xl mx-auto">
+                                                                <h2 class="text-3xl font-bold mb-4">Salut, moi c'est [Ton Nom]</h2>
+                                                                    <p class="text-lg">Je suis créateur de contenu, monteur vidéo et passionné par les univers numériques comme Roblox ou Fortnite. Ce site présente quelques-unes de mes réalisations.</p>
+                                                                      </section>  <!-- Projects -->  <section id="projects" class="p-10 bg-gray-100">
+                                                                          <h2 class="text-3xl font-bold mb-6 text-center">Montages</h2>
+                                                                              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="gallery">
+                                                                                    <!-- Les montages seront injectés ici automatiquement -->
+                                                                                        </div>
+                                                                                          </section>  <!-- Contact -->  <section id="contact" class="p-10 max-w-xl mx-auto text-center">
+                                                                                              <h2 class="text-3xl font-bold mb-4">Contact</h2>
+                                                                                                  <p>Tu peux me retrouver sur :</p>
+                                                                                                      <div class="mt-4 space-x-4">
+                                                                                                            <a href="#" class="text-blue-600 hover:underline">YouTube</a>
+                                                                                                                  <a href="#" class="text-pink-600 hover:underline">Instagram</a>
+                                                                                                                        <a href="#" class="text-sky-600 hover:underline">Twitter</a>
+                                                                                                                            </div>
+                                                                                                                              </section>  <!-- Footer -->  <footer class="bg-black text-white text-center p-4 mt-10">
+                                                                                                                                  &copy; 2025 LYNX - Portfolio
+                                                                                                                                    </footer>  <script>
+                                                                                                                                        // Charge dynamiquement les montages
+                                                                                                                                            fetch('gallery.json')
+                                                                                                                                                  .then(res => res.json())
+                                                                                                                                                        .then(data => {
+                                                                                                                                                                    const gallery = document.getElementById('gallery');
+                                                                                                                                                                            data.forEach(video => {
+                                                                                                                                                                                          const div = document.createElement('div');
+                                                                                                                                                                                                    div.className = "bg-white shadow p-4 rounded-lg";
+                                                                                                                                                                                                              div.innerHTML = `
+                                                                                                                                                                                                                          <video class="w-full rounded mb-2" controls src="${video.url}"></video>
+                                                                                                                                                                                                                                      <h3 class="text-xl font-semibold">${video.title}</h3>
+                                                                                                                                                                                                                                                  <p class="text-sm text-gray-600">${video.description}</p>
+                                                                                                                                                                                                                                                            `;
+                                                                                                                                                                                                                                                                      gallery.appendChild(div);
+                                                                                                                                                                            });
+                                                                                                                                                        });
+                                                                                                                                                          </script></body>
+                                                                                                                                                          </html>
+                                                                                                                                                                            })
+                                                                                                                                                        })
