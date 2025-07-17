@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="fr">
+    <head>
+      <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Admin - Ajouter un montage</title>
+            <script src="https://cdn.tailwindcss.com"></script>
+            </head>
+            <body class="bg-gray-100 p-6">
+              <div class="max-w-xl mx-auto bg-white p-8 rounded-lg shadow">
+                  <h1 class="text-2xl font-bold mb-4">Ajouter un nouveau montage</h1><form id="uploadForm" class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium">Titre</label>
+                            <input type="text" id="title" class="w-full border p-2 rounded" required>
+                              </div>
+                                <div>
+                                    <label class="block text-sm font-medium">Description</label>
+                                        <textarea id="description" class="w-full border p-2 rounded" required></textarea>
+                                          </div>
+                                            <div>
+                                                <label class="block text-sm font-medium">Vidéo (URL directe)</label>
+                                                    <input type="url" id="videoUrl" class="w-full border p-2 rounded" required>
+                                                      </div>
+                                                        <button type="submit" class="bg-black text-white px-4 py-2 rounded">Ajouter</button>
+                                                        </form>
+
+                                                        <p id="successMsg" class="mt-4 text-green-600 hidden">✅ Montage ajouté dans gallery.json !</p>
+
+                                                          </div>  <script>
+                                                              const form = document.getElementById('uploadForm');
+                                                                  const successMsg = document.getElementById('successMsg');
+
+                                                                      form.addEventListener('submit', async (e) => {
+                                                                            e.preventDefault();
+                                                                                  const title = document.getElementById('title').value;
+                                                                                        const description = document.getElementById('description').value;
+                                                                                              const videoUrl = document.getElementById('videoUrl').value;
+
+                                                                                                    // Récupère les anciennes vidéos
+                                                                                                          const res = await fetch('gallery.json');
+                                                                                                                const gallery = await res.json();
+
+                                                                                                                      // Ajoute la nouvelle vidéo
+                                                                                                                            gallery.push({ title, description, url: videoUrl });
+
+                                                                                                                                  // Télécharge le nouveau JSON (car GitHub Pages ne peut pas écrire)
+                                                                                                                                        const blob = new Blob([JSON.stringify(gallery, null, 2)], { type: 'application/json' });
+                                                                                                                                              const a = document.createElement('a');
+                                                                                                                                                    a.href = URL.createObjectURL(blob);
+                                                                                                                                                          a.download = 'gallery.json';
+                                                                                                                                                                a.click();
+                                                                                                                                                                      successMsg.classList.remove('hidden');
+                                                                                                                                                                            form.reset();
+                                                                                                                                                                                });
+                                                                                                                                                                                  </script></body>
+                                                                                                                                                                                  </html>
